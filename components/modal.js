@@ -61,15 +61,16 @@ const Modal = ({ collection }) => {
                             </div> */}
 
                             <div className={layout.flex}>
-                                <button className={`${styles.time} ${styles.active}`}>1H</button>
-                                <button className={styles.time}>24H</button>
+                                <button className={`${styles.time} ${styles.active}`}>24H</button>
+                                <button className={styles.time}>3D</button>
                                 <button className={styles.time}>7D</button>
+                                <button className={styles.time}>1M</button>
                             </div>
 
                             <div className={layout.grid}>
                                 <Card type='data' data='floor' value={'Ξ15'} delta={6.71}></Card>
                                 <Card type='data' data='trading activity' value={712} delta={2641}></Card>
-                                <Card type='data' data='sales volume' value={'Ξ2650'} delta={71}></Card>
+                                {/* <Card type='data' data='sales volume' value={'Ξ2650'} delta={71}></Card> */}
                                 <Card type='data' data='buyers' value={86} delta={2.3}></Card>
                             </div>
                         </div>
