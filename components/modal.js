@@ -41,15 +41,17 @@ const Modal = ({ collection }) => {
                     {loaded && activeCollection && (
                         <div className={styles.content}>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <img
-                                    src='https://lh3.googleusercontent.com/8RJY7K-hWX0Cmv_HNnd2GZGKPlMHXr682AECe7dEELBT59down-uwNojACEHDgANjAIPebPSzA8m2ZrdWv61AEz3SVDprwvWs-9aOA=s120'
-                                    alt=''
-                                />
+                                <div style={{ display: 'grid', rowGap: '.5em' }}>
+                                    <img
+                                        src='https://lh3.googleusercontent.com/8RJY7K-hWX0Cmv_HNnd2GZGKPlMHXr682AECe7dEELBT59down-uwNojACEHDgANjAIPebPSzA8m2ZrdWv61AEz3SVDprwvWs-9aOA=s120'
+                                        alt=''
+                                    />
+                                    <h1>{activeCollection?.collection_name}</h1>
+                                </div>
 
                                 <CloseButton onClick={handleClose}></CloseButton>
                             </div>
 
-                            <h1>{activeCollection?.collection_name}</h1>
                             {/* <div style={{ display: 'grid', rowGap: '.5em' }}>
                                 <h1>{activeCollection?.collection_name}</h1>
                                 <div className={layout.flex}>

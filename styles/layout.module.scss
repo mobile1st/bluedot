@@ -32,3 +32,8 @@
     display: flex;
     column-gap: 1em;
 }
+
+.no-scroll {
+    overflow: hidden;
+    position: fixed;
+}

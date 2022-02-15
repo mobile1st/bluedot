@@ -74,7 +74,7 @@ const Website = () => {
                         </div>
                         <Logo></Logo>
                     </header>
-                    <main className={layout.page}>
+                    <main className={`${layout.page} ${showModal ? layout['no-scroll'] : ''}`}>
                         <div className={layout.content}>
                             <div className={styles.overview}>
                                 <span className={styles.subtext}>min. value</span>
