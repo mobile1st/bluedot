@@ -34,7 +34,8 @@
     flex-direction: column;
     flex: 1 1;
     row-gap: 2em;
-    margin: 10em 0 0 0;
+    margin: 10em auto;
+    max-width: 850px;
     background: #131313;
     min-height: calc(100vh - 10em);
     padding: 1em;
