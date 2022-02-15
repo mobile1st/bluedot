@@ -1,0 +1,21 @@
+@import 'colors';
+
+.overview {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    text-align: center;
+    color: white;
+
+    .subtext {
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: $white-50;
+    }
+
+    .value {
+        font-size: 38px;
+        font-weight: 500;
+    }
+}
