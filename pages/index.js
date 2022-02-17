@@ -41,7 +41,7 @@ const Home = () => {
                         <span className={styles.link}>
                             Powered by{' '}
                             <a href='https://sudocoins.com' className={styles.link} style={{ fontWeight: '700' }}>
-                                Sudocoins
+                                Osis
                             </a>
                         </span>
                     </div>

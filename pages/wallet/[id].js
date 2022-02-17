@@ -14,42 +14,53 @@ const Website = () => {
     const router = useRouter();
     const { id } = router.query;
 
-    const [nfts, setNfts] = useState();
-    const [value, setValue] = useState(null);
     const [loaded, setLoaded] = useState(false);
+    const [wallet, setWallet] = useState(null);
 
     useEffect(() => {
         console.log('wallet id', id);
     }, [id]);
 
     useEffect(() => {
+        console.log(wallet);
+    }, [wallet]);
+
+    useEffect(() => {
         const fetchData = async (id) => {
-            try {
-                let initWallet = await getWallet(id);
-                console.log(initWallet);
-
-                if (initWallet) {
-                    let walletArray = [];
-                    for (var key of Object.keys(initWallet.portfolio)) {
-                        walletArray.push(initWallet.portfolio[key]);
-                    }
-                    console.log(walletArray);
-
-                    setNfts(walletArray);
-                    setValue(initWallet.valuation);
-                    setLoaded(true);
-                }
-            } catch (err) {
-                console.log(err);
-                setLoaded(false);
-                router.push('/');
-            }
+            let initWallet = await getWallet(id);
+            setWallet(initWallet);
+            setLoaded(true);
         };
 
-        if (id) {
+        if (id && !loaded && !wallet) {
             fetchData(id);
         }
-    }, [id]);
+    }, [id, loaded, wallet]);
+
+    const formatNumber = (number) => {
+        return parseFloat(number).toLocaleString('en-US');
+    };
+
+    const calculateFloorDifference = (nft) => {
+        if (nft?.more_charts?.floor?.length) {
+            let length = nft.more_charts.floor.length;
+            let currentValue = nft.more_charts.floor[length - 1].y;
+            let previousValue = nft.more_charts.floor[length - 2].y;
+
+            // setIsPositive(currentValue > previousValue);
+
+            console.log(currentValue - previousValue);
+
+            console.log(percentageDifference(currentValue, previousValue));
+            return percentageDifference(currentValue, previousValue);
+        } else {
+            return '-';
+        }
+    };
+
+    const percentageDifference = (a, b) => {
+        return `${(100 * Math.abs((a - b) / ((a + b) / 2))).toFixed(2)}%`;
+    };
 
     return (
         <>
@@ -78,16 +89,20 @@ const Website = () => {
                         <div className={layout.content}>
                             <div className={styles.overview}>
                                 <span className={styles.subtext}>min. value</span>
-                                <span className={styles.value}>{value} ETH</span>
+                                <span className={styles.value}>${formatNumber(wallet.usd_valuation)}</span>
                                 <span className={styles.subtext}>Ξ0.27</span>
                             </div>
 
                             <div className={layout.grid}>
-                                {nfts &&
-                                    nfts.length > 0 &&
-                                    nfts.map((nft) => (
+                                {wallet.nfts &&
+                                    wallet.nfts.length > 0 &&
+                                    wallet.nfts.map((nft) => (
                                         <>
-                                            <Card type={'collection'} nft={nft}></Card>
+                                            <Card
+                                                type={'collection'}
+                                                nft={nft}
+                                                floorChange={calculateFloorDifference(nft)}
+                                            ></Card>
                                         </>
                                     ))}
                             </div>

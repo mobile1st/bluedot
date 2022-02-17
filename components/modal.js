@@ -68,10 +68,24 @@ const Modal = ({ collection }) => {
                             </div>
 
                             <div className={layout.grid}>
-                                <Card type='data' data='floor' value={'Ξ15'} delta={6.71}></Card>
-                                <Card type='data' data='trading activity' value={712} delta={2641}></Card>
+                                <Card
+                                    type='data'
+                                    data='floor'
+                                    value={activeCollection?.open_sea_stats?.floor_price}
+                                    delta={6.71}
+                                ></Card>
+                                <Card
+                                    type='data'
+                                    data='trading activity'
+                                    value={
+                                        activeCollection?.more_charts?.sales[
+                                            activeCollection?.more_charts?.sales.length - 1
+                                        ].y
+                                    }
+                                    delta={2641}
+                                ></Card>
                                 {/* <Card type='data' data='sales volume' value={'Ξ2650'} delta={71}></Card> */}
-                                <Card type='data' data='buyers' value={86} delta={2.3}></Card>
+                                {/* <Card type='data' data='buyers' value={86} delta={2.3}></Card> */}
                             </div>
                         </div>
                     )}
