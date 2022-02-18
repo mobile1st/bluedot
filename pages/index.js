@@ -32,7 +32,7 @@ const Home = () => {
                         <form action='#' method='get' onSubmit={handleSubmit}>
                             <input
                                 type='text'
-                                placeholder='Enter an ETH address or ENS'
+                                placeholder='Enter an ETH address'
                                 value={ethAddress}
                                 onChange={handleChange}
                             />

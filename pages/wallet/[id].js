@@ -28,6 +28,14 @@ const Website = () => {
     useEffect(() => {
         const fetchData = async (id) => {
             let initWallet = await getWallet(id);
+
+            let sortedNfts = [];
+
+            sortedNfts = [...initWallet.nfts].sort((a, b) =>
+                a.open_sea_stats.floor_price < b.open_sea_stats.floor_price ? 1 : -1
+            );
+            initWallet.nfts = sortedNfts;
+            console.log(initWallet);
             setWallet(initWallet);
             setLoaded(true);
         };
@@ -47,11 +55,6 @@ const Website = () => {
             let currentValue = nft.more_charts.floor[length - 1]?.y;
             let previousValue = nft.more_charts.floor[length - 2]?.y;
 
-            // setIsPositive(currentValue > previousValue);
-
-            console.log(currentValue - previousValue);
-
-            console.log(percentageDifference(currentValue, previousValue));
             return percentageDifference(currentValue, previousValue);
         } else {
             return '-';

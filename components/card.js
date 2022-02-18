@@ -13,7 +13,7 @@ const Card = (props) => {
         setActiveCollection(props.nft);
     };
 
-    console.log(props.nft);
+    // console.log(props.nft);
 
     const percentageDifference = (a, b) => {
         setLoaded(true);
