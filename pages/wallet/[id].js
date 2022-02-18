@@ -46,7 +46,7 @@ const Website = () => {
     }, [id, loaded, wallet]);
 
     const formatNumber = (number) => {
-        return parseFloat(number).toLocaleString('en-US');
+        return parseFloat(number).toFixed(2).toLocaleString('en-US');
     };
 
     const calculateFloorDifference = (nft) => {
