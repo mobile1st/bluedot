@@ -51,12 +51,12 @@ const Card = (props) => {
                         <img src={props.nft.preview_url} alt='' />
                         <span className={styles.name}>{props.nft.collection_name}</span>
                     </div>
-                    <div className={styles.right}>
+                    {/* <div className={styles.right}>
                         <span className={styles.percent}>{props.floorChange}</span>
                         <span>
                             <ArrowUp></ArrowUp>
                         </span>
-                    </div>
+                    </div> */}
                 </div>
             )}
 
