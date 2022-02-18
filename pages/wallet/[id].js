@@ -44,8 +44,8 @@ const Website = () => {
     const calculateFloorDifference = (nft) => {
         if (nft?.more_charts?.floor?.length) {
             let length = nft.more_charts.floor.length;
-            let currentValue = nft.more_charts.floor[length - 1].y;
-            let previousValue = nft.more_charts.floor[length - 2].y;
+            let currentValue = nft.more_charts.floor[length - 1]?.y;
+            let previousValue = nft.more_charts.floor[length - 2]?.y;
 
             // setIsPositive(currentValue > previousValue);
 

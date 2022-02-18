@@ -60,15 +60,15 @@ const Modal = ({ collection }) => {
                                 </div>
                             </div> */}
 
-                            <div className={layout.flex}>
+                            {/* <div className={layout.flex}>
                                 <button className={`${styles.time} ${styles.active}`}>24H</button>
                                 <button className={styles.time}>3D</button>
                                 <button className={styles.time}>7D</button>
                                 <button className={styles.time}>1M</button>
-                            </div>
+                            </div> */}
 
                             <div className={layout.grid}>
-                                <Card
+                                {/* <Card
                                     type='data'
                                     data='floor'
                                     value={activeCollection?.open_sea_stats?.floor_price}
@@ -83,7 +83,7 @@ const Modal = ({ collection }) => {
                                         ].y
                                     }
                                     delta={2641}
-                                ></Card>
+                                ></Card> */}
                                 {/* <Card type='data' data='sales volume' value={'Ξ2650'} delta={71}></Card> */}
                                 {/* <Card type='data' data='buyers' value={86} delta={2.3}></Card> */}
                             </div>
