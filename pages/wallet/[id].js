@@ -92,8 +92,8 @@ const Website = () => {
                         <div className={layout.content}>
                             <div className={styles.overview}>
                                 <span className={styles.subtext}>min. value</span>
-                                <span className={styles.value}>${formatNumber(wallet.usd_valuation)}</span>
-                                <span className={styles.subtext}>Ξ0.27</span>
+                                <span className={styles.value}>${formatNumber(wallet?.usd_valuation)}</span>
+                                <span className={styles.subtext}>{wallet?.eth_valuation} ETH</span>
                             </div>
 
                             <div className={layout.grid}>
