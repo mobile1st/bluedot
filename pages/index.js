@@ -40,7 +40,12 @@ const Home = () => {
                         </form>
                         <span className={styles.link}>
                             Powered by{' '}
-                            <a href='https://sudocoins.com' className={styles.link} style={{ fontWeight: '700' }}>
+                            <a
+                                href='https://sudocoins.com'
+                                target='_blank'
+                                className={styles.link}
+                                style={{ fontWeight: '700' }}
+                            >
                                 Osis
                             </a>
                         </span>
