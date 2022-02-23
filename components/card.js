@@ -4,14 +4,14 @@ import { Chart } from '../components';
 import { ArrowUp } from '../svgs';
 import styles from '../styles/card.module.scss';
 import chartStyles from '../styles/chart.module.scss';
+import layout from '../styles/layout.module.scss';
 
 const Card = (props) => {
-    const { showModal, setShowModal, setActiveCollection, chartData } = useUserContext();
+    const { showModal, setShowModal, activeCollection, setActiveCollection, chartData } = useUserContext();
     const [isPositive, setIsPositive] = useState(null);
     const [loaded, setLoaded] = useState(false);
 
     const handleClick = () => {
-        setShowModal(true);
         setActiveCollection(props.nft);
     };
 
@@ -48,8 +48,6 @@ const Card = (props) => {
     const displayFloorValue = () => {
         return ['NaN', '-', 'None'].includes(props.floorChange) ? '--' : `${props.floorChange}%`;
     };
-
-    console.log(props);
 
     return (
         <>
@@ -90,6 +88,19 @@ const Card = (props) => {
                     {/* <span></span> */}
                 </div>
             )}
+            <>
+                {activeCollection === props.nft && (
+                    <div className={styles.showDetails}>
+                        <div className={styles.content}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <div style={{ display: 'grid', rowGap: '.5em' }}>
+                                    <img src={activeCollection.preview_url} alt='' />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </>
 
             {props.type === 'data' && (
                 <div className={styles.card}>
