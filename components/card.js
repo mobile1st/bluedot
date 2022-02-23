@@ -10,6 +10,8 @@ const Card = (props) => {
     const [isPositive, setIsPositive] = useState(null);
     const [loaded, setLoaded] = useState(false);
 
+    console.log(props);
+
     const handleClick = () => {
         setShowModal(true);
         setActiveCollection(props.nft);
@@ -50,7 +52,7 @@ const Card = (props) => {
             {props.type === 'collection' && (
                 <div className={styles.card} onClick={handleClick}>
                     <div className={styles.left}>
-                        <img src={props.nft.preview_url} alt='' />
+                        {/* <img src={props.nft.preview_url} alt='' /> */}
                         <span className={styles.name}>{props.nft.collection_name}</span>
                     </div>
                     <div className={chartStyles.chart}>
@@ -60,16 +62,22 @@ const Card = (props) => {
                             data={props.nft.more_charts.floor}
                             showLabel={false}
                             className={chartStyles.chart}
+                            color={props.floorChange > 0.0 ? 'green' : props.floorChange < 0.0 ? 'red' : 'gray'}
                         ></Chart>
                     </div>
                     <div className={styles.right}>
                         {/* <span className={styles.percent}>{props.floorChange}</span> */}
-                        <span className={styles.value}>{props.nft.open_sea_stats.floor_price}</span>
+                        <span className={styles.value}>{props.nft.open_sea_stats.floor_price} ETH</span>
 
-                        <div className={styles.flex}>
-                            <span className={styles.subtext}>{props.floorChange}</span>
-                            <ArrowUp height='10'></ArrowUp>
-                        </div>
+                        <span
+                            className={styles['filled-background']}
+                            style={{
+                                background:
+                                    props.floorChange > 0.0 ? 'green' : props.floorChange < 0.0 ? 'red' : 'gray',
+                            }}
+                        >
+                            {props.floorChange}%
+                        </span>
                     </div>
                     {/* <span></span> */}
                 </div>

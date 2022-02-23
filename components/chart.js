@@ -18,6 +18,7 @@ const Chart = ({
     bgColor = 'rgba(40, 200, 64, 0.2)',
     showLabel = true,
     lineColor = 'rgba(40, 200, 64, 1)',
+    color,
     ...props
 }) => {
     ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -116,7 +117,7 @@ const Chart = ({
             {
                 label: 'Dataset 1',
                 data: data,
-                borderColor: 'rgb(255, 99, 132)',
+                borderColor: color,
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
         ],

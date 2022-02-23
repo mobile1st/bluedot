@@ -62,7 +62,8 @@ const Website = () => {
     };
 
     const percentageDifference = (a, b) => {
-        return `${(100 * Math.abs((a - b) / ((a + b) / 2))).toFixed(2)}%`;
+        let change = 100 * Math.abs((a - b) / ((a + b) / 2));
+        return change.toFixed(2);
     };
 
     return (

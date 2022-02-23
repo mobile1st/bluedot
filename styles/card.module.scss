@@ -13,7 +13,7 @@
     cursor: pointer;
 
     img {
-        height: 25px;
+        height: 35px;
         border-radius: 25px;
     }
 
@@ -36,19 +36,19 @@
     .right {
         display: flex;
         flex-direction: column;
-        row-gap: 0.5em;
+        row-gap: 0.4em;
         column-gap: 0.5em;
         align-items: center;
 
         .value {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
         }
     }
 
     .name {
-        font-size: 14px;
-        font-weight: 400;
+        font-size: 15px;
+        font-weight: 600;
     }
 
     .percent {
@@ -75,6 +75,14 @@
         font-weight: 600;
     }
 
-    .chart {
+    .filled-background {
+        padding: 0.3em 0.5em;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: $white;
+        border-radius: 4px;
+        width: 100%;
+        text-align: center;
     }
 }
