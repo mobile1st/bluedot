@@ -62,13 +62,16 @@ const Card = (props) => {
                             className={chartStyles.chart}
                         ></Chart>
                     </div>
-                    {/* <div className={styles.right}>
-                        <span className={styles.percent}>{props.floorChange}</span>
-                        <span>
-                            <ArrowUp></ArrowUp>
-                        </span>
-                    </div> */}
-                    <span></span>
+                    <div className={styles.right}>
+                        {/* <span className={styles.percent}>{props.floorChange}</span> */}
+                        <span className={styles.value}>{props.nft.open_sea_stats.floor_price}</span>
+
+                        <div className={styles.flex}>
+                            <span className={styles.subtext}>{props.floorChange}</span>
+                            <ArrowUp height='10'></ArrowUp>
+                        </div>
+                    </div>
+                    {/* <span></span> */}
                 </div>
             )}
 
