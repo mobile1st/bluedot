@@ -85,13 +85,13 @@ const Website = () => {
                     <header>
                         <div>
                             {/* <Link href='/'>home</Link> */}
-                            <a
+                            {/* <a
                                 href='https://airtable.com/shrGT8FfJrFZWS3BC'
                                 target='_blank'
                                 className={layout['header-link']}
                             >
                                 Request a Feature
-                            </a>
+                            </a> */}
                         </div>
                         <Logo></Logo>
                     </header>
