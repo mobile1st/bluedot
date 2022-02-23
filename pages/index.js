@@ -46,7 +46,7 @@ const Home = () => {
                                 className={styles.link}
                                 style={{ fontWeight: '700' }}
                             >
-                                Osis
+                                Sudocoins
                             </a>
                         </span>
                     </div>
