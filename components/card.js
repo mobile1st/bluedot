@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useUserContext } from '../context/user';
+import { Chart } from '../components';
 import { ArrowUp } from '../svgs';
 import styles from '../styles/card.module.scss';
+import chartStyles from '../styles/chart.module.scss';
 
 const Card = (props) => {
-    const { showModal, setShowModal, setActiveCollection } = useUserContext();
+    const { showModal, setShowModal, setActiveCollection, chartData } = useUserContext();
     const [isPositive, setIsPositive] = useState(null);
     const [loaded, setLoaded] = useState(false);
 
@@ -51,12 +53,22 @@ const Card = (props) => {
                         <img src={props.nft.preview_url} alt='' />
                         <span className={styles.name}>{props.nft.collection_name}</span>
                     </div>
+                    <div className={chartStyles.chart}>
+                        <Chart
+                            type='floor'
+                            title='Floor'
+                            data={props.nft.more_charts.floor}
+                            showLabel={false}
+                            className={chartStyles.chart}
+                        ></Chart>
+                    </div>
                     {/* <div className={styles.right}>
                         <span className={styles.percent}>{props.floorChange}</span>
                         <span>
                             <ArrowUp></ArrowUp>
                         </span>
                     </div> */}
+                    <span></span>
                 </div>
             )}
 

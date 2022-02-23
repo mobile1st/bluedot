@@ -98,9 +98,9 @@ const Website = () => {
                     <main className={`${layout.page} ${showModal ? layout['no-scroll'] : ''}`}>
                         <div className={layout.content}>
                             <div className={styles.overview}>
-                                <span className={styles.subtext}>Wallet value</span>
+                                <span className={styles.subtext}>Min value</span>
                                 <span className={styles.value}>${formatNumber(wallet?.usd_valuation)}</span>
-                                <span className={styles.subtext}>{wallet?.eth_valuation} ETH</span>
+                                <span className={styles.subtext}>{wallet?.eth_valuation.toFixed(2)} ETH</span>
                             </div>
 
                             <div className={layout.grid}>
@@ -112,6 +112,7 @@ const Website = () => {
                                                 type={'collection'}
                                                 nft={nft}
                                                 floorChange={calculateFloorDifference(nft)}
+                                                chartData={nft.more_charts.floor}
                                             ></Card>
                                         </>
                                     ))}

@@ -32,6 +32,11 @@ const Modal = ({ collection }) => {
         setActiveCollection(null);
     };
 
+    const percentageDifference = (a, b) => {
+        setLoaded(true);
+        return `${(100 * Math.abs((a - b) / ((a + b) / 2))).toFixed(2)}%`;
+    };
+
     return (
         <>
             <main className={styles.modal}>
@@ -68,7 +73,7 @@ const Modal = ({ collection }) => {
                             </div> */}
 
                             <div className={layout.grid}>
-                                {/* <Card
+                                <Card
                                     type='data'
                                     data='floor'
                                     value={activeCollection?.open_sea_stats?.floor_price}
@@ -83,7 +88,7 @@ const Modal = ({ collection }) => {
                                         ].y
                                     }
                                     delta={2641}
-                                ></Card> */}
+                                ></Card>
                                 {/* <Card type='data' data='sales volume' value={'Ξ2650'} delta={71}></Card> */}
                                 {/* <Card type='data' data='buyers' value={86} delta={2.3}></Card> */}
                             </div>
