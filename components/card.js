@@ -10,8 +10,6 @@ const Card = (props) => {
     const [isPositive, setIsPositive] = useState(null);
     const [loaded, setLoaded] = useState(false);
 
-    console.log(props);
-
     const handleClick = () => {
         setShowModal(true);
         setActiveCollection(props.nft);
@@ -48,9 +46,10 @@ const Card = (props) => {
     // }, [props.nft]);
 
     const displayFloorValue = () => {
-        console.log(typeof props.floorChange);
         return ['NaN', '-', 'None'].includes(props.floorChange) ? '--' : `${props.floorChange}%`;
     };
+
+    console.log(props);
 
     return (
         <>
@@ -64,7 +63,7 @@ const Card = (props) => {
                         <Chart
                             type='floor'
                             title='Floor'
-                            data={props.nft.more_charts.floor}
+                            data={props.nft.more_charts?.floor}
                             showLabel={false}
                             className={chartStyles.chart}
                             color={props.floorChange > 0.0 ? 'green' : props.floorChange < 0.0 ? 'red' : 'gray'}
@@ -73,9 +72,9 @@ const Card = (props) => {
                     <div className={styles.right}>
                         {/* <span className={styles.percent}>{props.floorChange}</span> */}
                         <span className={styles.value}>
-                            {['None'].includes(props.nft.open_sea_stats.floor_price)
+                            {['None'].includes(props.nft?.open_sea_stats?.floor_price)
                                 ? '--'
-                                : `${props.nft.open_sea_stats.floor_price} ETH`}
+                                : `${props.nft?.open_sea_stats?.floor_price} ETH`}
                         </span>
 
                         <span

@@ -57,13 +57,6 @@ const Chart = ({
         }
     }, [data]);
 
-    useEffect(() => {
-        console.log('xAxis', xAxis);
-    }, [xAxis]);
-    useEffect(() => {
-        console.log('yAxis', yAxis);
-    }, [yAxis]);
-
     const options = {
         title: {
             display: false,

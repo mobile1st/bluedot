@@ -16,6 +16,8 @@ const Website = () => {
 
     const [loaded, setLoaded] = useState(false);
     const [wallet, setWallet] = useState(null);
+    const [ethValuation, setEthValuation] = useState(null);
+    const [usdValuation, setUsdValuation] = useState(null);
 
     useEffect(() => {
         console.log('wallet id', id);
@@ -31,12 +33,16 @@ const Website = () => {
 
             let sortedNfts = [];
 
-            sortedNfts = [...initWallet.nfts].sort((a, b) =>
-                a.open_sea_stats.floor_price < b.open_sea_stats.floor_price ? 1 : -1
-            );
+            sortedNfts = [...initWallet.nfts].sort((a, b) => {
+                console.log(a);
+                return a.open_sea_stats.floor_price < b.open_sea_stats.floor_price ? 1 : -1;
+            });
             initWallet.nfts = sortedNfts;
             console.log(initWallet);
-            setWallet(initWallet);
+            console.log(sortedNfts);
+            setWallet(sortedNfts);
+            setEthValuation(initWallet.eth_valuation);
+            setUsdValuation(initWallet.usd_valuation);
             setLoaded(true);
         };
 
@@ -81,7 +87,7 @@ const Website = () => {
                 </>
             )}
 
-            {loaded && (
+            {loaded && wallet && wallet.length > 0 && (
                 <>
                     <header>
                         <div>
@@ -94,27 +100,27 @@ const Website = () => {
                                 Request a Feature
                             </a> */}
                         </div>
-                        <h4>good good</h4>
+                        {/* <h4>good good</h4> */}
                         {/* <Logo></Logo> */}
                     </header>
                     <main className={`${layout.page} ${styles.wallet} ${showModal ? layout['no-scroll'] : ''}`}>
                         <div className={layout.content}>
                             <div className={styles.overview}>
                                 <span className={styles.subtext}>Min value</span>
-                                <span className={styles.value}>${formatNumber(wallet?.usd_valuation)}</span>
-                                <span className={styles.subtext}>{wallet?.eth_valuation.toFixed(2)} ETH</span>
+                                <span className={styles.value}>${formatNumber(usdValuation)}</span>
+                                <span className={styles.subtext}>{ethValuation.toFixed(2)} ETH</span>
                             </div>
 
                             <div className={layout.grid}>
-                                {wallet.nfts &&
-                                    wallet.nfts.length > 0 &&
-                                    wallet.nfts.map((nft) => (
+                                {wallet &&
+                                    wallet.length > 0 &&
+                                    wallet.map((nft) => (
                                         <>
                                             <Card
                                                 type={'collection'}
                                                 nft={nft}
                                                 floorChange={calculateFloorDifference(nft)}
-                                                chartData={nft.more_charts.floor}
+                                                chartData={nft?.more_charts?.floor}
                                             ></Card>
                                         </>
                                     ))}
