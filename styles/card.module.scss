@@ -1,10 +1,12 @@
 @import 'colors';
 
 .card {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    // justify-items: center;
+    align-items: center;
     width: 100%;
-    height: 65px;
+    // height: 65px;
     border-radius: 6px;
     padding: 20px 18px 20px 18px;
     background-color: rgba(15, 15, 15, 1);
@@ -84,5 +86,12 @@
         border-radius: 4px;
         width: 100%;
         text-align: center;
+    }
+}
+
+@media (min-width: 850px) {
+    .card {
+        grid-template-columns: 1fr 4fr 1fr;
+        justify-items: center;
     }
 }

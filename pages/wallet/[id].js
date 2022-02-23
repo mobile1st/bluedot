@@ -94,9 +94,10 @@ const Website = () => {
                                 Request a Feature
                             </a> */}
                         </div>
-                        <Logo></Logo>
+                        <h4>good good</h4>
+                        {/* <Logo></Logo> */}
                     </header>
-                    <main className={`${layout.page} ${showModal ? layout['no-scroll'] : ''}`}>
+                    <main className={`${layout.page} ${styles.wallet} ${showModal ? layout['no-scroll'] : ''}`}>
                         <div className={layout.content}>
                             <div className={styles.overview}>
                                 <span className={styles.subtext}>Min value</span>

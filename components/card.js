@@ -47,6 +47,11 @@ const Card = (props) => {
     //     }
     // }, [props.nft]);
 
+    const displayFloorValue = () => {
+        console.log(typeof props.floorChange);
+        return ['NaN', '-', 'None'].includes(props.floorChange) ? '--' : `${props.floorChange}%`;
+    };
+
     return (
         <>
             {props.type === 'collection' && (
@@ -67,7 +72,11 @@ const Card = (props) => {
                     </div>
                     <div className={styles.right}>
                         {/* <span className={styles.percent}>{props.floorChange}</span> */}
-                        <span className={styles.value}>{props.nft.open_sea_stats.floor_price} ETH</span>
+                        <span className={styles.value}>
+                            {['None'].includes(props.nft.open_sea_stats.floor_price)
+                                ? '--'
+                                : `${props.nft.open_sea_stats.floor_price} ETH`}
+                        </span>
 
                         <span
                             className={styles['filled-background']}
@@ -76,7 +85,7 @@ const Card = (props) => {
                                     props.floorChange > 0.0 ? 'green' : props.floorChange < 0.0 ? 'red' : 'gray',
                             }}
                         >
-                            {props.floorChange}%
+                            {displayFloorValue()}
                         </span>
                     </div>
                     {/* <span></span> */}
