@@ -31,3 +31,14 @@ h5,
 h6 {
     color: $white-50;
 }
+
+button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    background: #32bd55;
+}

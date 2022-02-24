@@ -72,7 +72,7 @@ const Card = (props) => {
                         <span className={styles.value}>
                             {['None'].includes(props.nft?.open_sea_stats?.floor_price)
                                 ? '--'
-                                : `${props.nft?.open_sea_stats?.floor_price} ETH`}
+                                : `Ξ${props.nft?.open_sea_stats?.floor_price}`}
                         </span>
 
                         <span
@@ -90,13 +90,29 @@ const Card = (props) => {
             )}
             <>
                 {activeCollection === props.nft && (
-                    <div className={styles.showDetails}>
+                    <div className={styles['card-expanded']}>
+                        <img src={activeCollection.preview_url} alt='' />
                         <div className={styles.content}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <div style={{ display: 'grid', rowGap: '.5em' }}>
-                                    <img src={activeCollection.preview_url} alt='' />
+                            <div className={styles.details}>
+                                <div className={styles.row}>
+                                    <span className={styles.title}>Floor Price</span>
+                                    <span className={styles.value}>$200</span>
+                                </div>
+                                <div className={styles.row}>
+                                    <span className={styles.title}>Service Fee</span>
+                                    <span className={styles.value}>$5.00</span>
+                                </div>
+                                <div className={styles.row}>
+                                    <span className={styles.title}>Gas Fee (Est)</span>
+                                    <span className={styles.value}>$210.45</span>
+                                </div>
+                                <div className={styles.row}>
+                                    <span className={styles.title}>You'll Receive</span>
+                                    <span className={styles.value}>$189.55</span>
                                 </div>
                             </div>
+
+                            <button className={styles.button}>Sell</button>
                         </div>
                     </div>
                 )}
