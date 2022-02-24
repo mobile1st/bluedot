@@ -12,7 +12,11 @@ const Card = (props) => {
     const [loaded, setLoaded] = useState(false);
 
     const handleClick = () => {
-        setActiveCollection(props.nft);
+        if (activeCollection === props.nft) {
+            setActiveCollection(null);
+        } else {
+            setActiveCollection(props.nft);
+        }
     };
 
     // console.log(props.nft);
