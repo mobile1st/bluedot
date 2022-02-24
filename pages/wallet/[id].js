@@ -59,7 +59,7 @@ const Website = () => {
         if (nft?.more_charts?.floor?.length) {
             let length = nft.more_charts.floor.length;
             let currentValue = nft.more_charts.floor[length - 1]?.y;
-            let previousValue = nft.more_charts.floor[length - 2]?.y;
+            let previousValue = nft.more_charts.floor[0]?.y;
 
             return percentageDifference(currentValue, previousValue);
         } else {

@@ -53,6 +53,8 @@ const Card = (props) => {
         return ['NaN', '-', 'None'].includes(props.floorChange) ? '--' : `${props.floorChange}%`;
     };
 
+    console.log(props.nft);
+
     return (
         <>
             {props.type === 'collection' && (
@@ -74,9 +76,9 @@ const Card = (props) => {
                     <div className={styles.right}>
                         {/* <span className={styles.percent}>{props.floorChange}</span> */}
                         <span className={styles.value}>
-                            {['None'].includes(props.nft?.open_sea_stats?.floor_price)
+                            {!props.nft?.more_charts?.floor
                                 ? '--'
-                                : `Ξ${props.nft?.open_sea_stats?.floor_price}`}
+                                : `Ξ${props.nft?.more_charts.floor[props.nft?.more_charts?.floor.length - 1].y}`}
                         </span>
 
                         <span
