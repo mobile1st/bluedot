@@ -4,6 +4,12 @@ const getWallet = async (ethAddress) => {
     return response.json();
 };
 
-export { getWallet };
+const getWalletOpenSea = async (ethAddress) => {
+    // let response = await API.post('SudocoinsApp', '/user/import-nfts', { body: { sub: ethAddress } });
+    let response = await fetch(`https://api.opensea.io/api/v1/assets?limit=50&format=json&owner=${ethAddress}`);
+    return response.json();
+};
+
+export { getWallet, getWalletOpenSea };
 
 // https://app.sudocoins.com/art/get-eth-rate

@@ -7,7 +7,8 @@ import chartStyles from '../styles/chart.module.scss';
 import layout from '../styles/layout.module.scss';
 
 const Card = (props) => {
-    const { showModal, setShowModal, activeCollection, setActiveCollection, chartData } = useUserContext();
+    const { showModal, setShowModal, activeCollection, setActiveCollection, activeCollectionNfts, chartData } =
+        useUserContext();
     const [isPositive, setIsPositive] = useState(null);
     const [loaded, setLoaded] = useState(false);
 
@@ -18,42 +19,15 @@ const Card = (props) => {
             setActiveCollection(props.nft);
         }
     };
-
-    // console.log(props.nft);
-
-    const percentageDifference = (a, b) => {
-        setLoaded(true);
-        return `${(100 * Math.abs((a - b) / ((a + b) / 2))).toFixed(2)}%`;
+    const handleChartClick = () => {
+        console.log('clicked chart');
     };
-
-    // const calculateFloorDifference = () => {
-    //     if (props.nft?.more_charts?.floor?.length) {
-    //         let length = props.nft.more_charts.floor.length;
-    //         let currentValue = props.nft.more_charts.floor[length - 1].y;
-    //         let previousValue = props.nft.more_charts.floor[length - 2].y;
-
-    //         setIsPositive(currentValue > previousValue);
-
-    //         console.log(currentValue - previousValue);
-
-    //         console.log(percentageDifference(currentValue, previousValue));
-    //         return percentageDifference(currentValue, previousValue);
-    //     } else {
-    //         return '-';
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     if (!loaded && props?.nft?.more_charts?.floor) {
-    //         calculateFloorDifference();
-    //     }
-    // }, [props.nft]);
 
     const displayFloorValue = () => {
         return ['NaN', '-', 'None'].includes(props.floorChange) ? '--' : `${props.floorChange}%`;
     };
 
-    console.log(props.nft);
+    // console.log(props.nft);
 
     return (
         <>
@@ -63,7 +37,7 @@ const Card = (props) => {
                         {/* <img src={props.nft.preview_url} alt='' /> */}
                         <span className={styles.name}>{props.nft.collection_name}</span>
                     </div>
-                    <div className={chartStyles.chart}>
+                    <div className={chartStyles.chart} onClick={handleChartClick}>
                         <Chart
                             type='floor'
                             title='Floor'
@@ -96,31 +70,52 @@ const Card = (props) => {
             )}
             <>
                 {activeCollection === props.nft && (
-                    <div className={styles['card-expanded']}>
-                        <img src={activeCollection.preview_url} alt='' />
-                        <div className={styles.content}>
-                            <div className={styles.details}>
-                                <div className={styles.row}>
-                                    <span className={styles.title}>Floor Price</span>
-                                    <span className={styles.value}>$200</span>
-                                </div>
-                                <div className={styles.row}>
-                                    <span className={styles.title}>Service Fee</span>
-                                    <span className={styles.value}>$5.00</span>
-                                </div>
-                                <div className={styles.row}>
-                                    <span className={styles.title}>Gas Fee (Est)</span>
-                                    <span className={styles.value}>$210.45</span>
-                                </div>
-                                <div className={styles.row}>
-                                    <span className={styles.title}>You'll Receive</span>
-                                    <span className={styles.value}>$189.55</span>
-                                </div>
-                            </div>
+                    <>
+                        {activeCollectionNfts &&
+                            activeCollectionNfts.length > 0 &&
+                            activeCollectionNfts.map((nft) => (
+                                <div className={styles['card-expanded']}>
+                                    <img src={nft?.image_url} alt='' />
+                                    <div className={styles.content}>
+                                        <div className={styles.details}>
+                                            <div className={styles.row}>
+                                                <span className={styles.title}>Floor Price</span>
+                                                <span className={styles.value}>
+                                                    Ξ
+                                                    {
+                                                        activeCollection?.more_charts?.floor[
+                                                            activeCollection.more_charts.floor.length - 1
+                                                        ].y
+                                                    }
+                                                </span>
+                                            </div>
+                                            <div className={styles.row}>
+                                                <span className={styles.title}>Service Fee</span>
+                                                <span className={styles.value}>$5.00</span>
+                                            </div>
+                                            <div className={styles.row}>
+                                                <span className={styles.title}>Gas Fee (Est)</span>
+                                                <span className={styles.value}>$210.45</span>
+                                            </div>
+                                            <div className={styles.row}>
+                                                <span className={styles.title}>You'll Receive</span>
+                                                <span className={styles.value}>$189.55</span>
+                                            </div>
+                                            {/* <div className={styles.row}>
+                                                <span className={styles.title}>Traits</span>
+                                                {nft.traits &&
+                                                    nft.traits.length > 0 &&
+                                                    nft.traits.map((trait) => (
+                                                        <span className={styles.value}>{trait.trait_type}</span>
+                                                    ))}
+                                            </div> */}
+                                        </div>
 
-                            <button className={styles.button}>Sell</button>
-                        </div>
-                    </div>
+                                        <button className={styles.button}>Sell</button>
+                                    </div>
+                                </div>
+                            ))}
+                    </>
                 )}
             </>
 

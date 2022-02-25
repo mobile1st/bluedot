@@ -4,13 +4,14 @@ import { useUserContext } from '../../context/user';
 import { useRouter } from 'next/router';
 import { Card, Modal } from '../../components';
 import { Logo } from '../../svgs';
-import { getWallet } from '../../apis/wallet';
+import { getWallet, getWalletOpenSea } from '../../apis/wallet';
 
 import layout from '../../styles/layout.module.scss';
 import styles from '../../styles/wallet.module.scss';
 
 const Website = () => {
-    const { showModal, setShowModal } = useUserContext();
+    const { showModal, setShowModal, activeCollection, activeCollectionNfts, setActiveCollectionNfts } =
+        useUserContext();
     const router = useRouter();
     const { id } = router.query;
 
@@ -18,25 +19,35 @@ const Website = () => {
     const [wallet, setWallet] = useState(null);
     const [ethValuation, setEthValuation] = useState(null);
     const [usdValuation, setUsdValuation] = useState(null);
+    const [nftData, setNftData] = useState(null);
+
+    // useEffect(() => {
+    //     console.log('wallet id', id);
+    // }, [id]);
+
+    // useEffect(() => {
+    //     console.log(wallet);
+    // }, [wallet]);
 
     useEffect(() => {
-        console.log('wallet id', id);
-    }, [id]);
-
-    useEffect(() => {
-        console.log(wallet);
-    }, [wallet]);
+        if (activeCollection) {
+            let nfts = nftData.filter((c) => c.collection_name === activeCollection.collection_name);
+            setActiveCollectionNfts(nfts);
+        } else {
+            setActiveCollectionNfts(null);
+        }
+    }, [activeCollection]);
 
     useEffect(() => {
         const fetchData = async (id) => {
             let initWallet = await getWallet(id);
-
             let sortedNfts = [];
 
             sortedNfts = [...initWallet.nfts].sort((a, b) => {
-                console.log(a);
+                // console.log(a);
                 return a.open_sea_stats.floor_price < b.open_sea_stats.floor_price ? 1 : -1;
             });
+
             initWallet.nfts = sortedNfts;
             console.log(initWallet);
             console.log(sortedNfts);
@@ -50,6 +61,32 @@ const Website = () => {
             fetchData(id);
         }
     }, [id, loaded, wallet]);
+
+    useEffect(() => {
+        const fetchOpenSeaData = async (id) => {
+            let openSeaData = await getWalletOpenSea(id);
+            console.log(openSeaData.assets);
+            let sortedOpenSeaData = [];
+
+            for (let index = 0; index < openSeaData.assets.length; index++) {
+                const element = openSeaData.assets[index];
+
+                let data = {
+                    collection_name: element.collection.name,
+                    image_url: element.image_url,
+                    traits: element.traits,
+                };
+                sortedOpenSeaData.push(data);
+            }
+
+            console.log(sortedOpenSeaData);
+            setNftData(sortedOpenSeaData);
+        };
+
+        if (wallet) {
+            fetchOpenSeaData(id);
+        }
+    }, [wallet, id]);
 
     const formatNumber = (number) => {
         return parseFloat(number).toFixed(2).toLocaleString('en-US');
