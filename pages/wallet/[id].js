@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { Card, Modal } from '../../components';
 import { Logo } from '../../svgs';
 import { getWallet, getWalletOpenSea } from '../../services/wallet';
-import { connectMetaMask } from '../../services/web3';
 
 import layout from '../../styles/layout.module.scss';
 import styles from '../../styles/wallet.module.scss';
@@ -19,6 +18,7 @@ const Website = () => {
         setActiveCollectionNfts,
         account,
         setAccount,
+        metamaskLogin,
     } = useUserContext();
     const router = useRouter();
     const { id } = router.query;
@@ -33,25 +33,6 @@ const Website = () => {
         console.log('account', account);
     }, [account]);
 
-    const metamaskLogin = async () => {
-        console.log('clicked metamask button');
-
-        if (window.ethereum) {
-            let walletId = await connectMetaMask();
-            console.log(walletId);
-
-            let walletDetails = await getWallet(walletId);
-            console.log(walletDetails);
-            setAccount(walletDetails);
-
-            localStorage.setItem('acc', JSON.stringify(walletDetails));
-            // localStorage.setItem('wat', JSON.stringify(watchlist));
-        } else if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            window.open('https://metamask.app.link/dapp/www.sudocoins.com', '_blank');
-        } else {
-            console.log('show modal saying to use chrome');
-        }
-    };
     // useEffect(() => {
     //     console.log('wallet id', id);
     // }, [id]);
@@ -74,10 +55,14 @@ const Website = () => {
             let initWallet = await getWallet(id);
             let sortedNfts = [];
 
-            sortedNfts = [...initWallet.nfts].sort((a, b) => {
-                // console.log(a);
-                return a.open_sea_stats.floor_price < b.open_sea_stats.floor_price ? 1 : -1;
-            });
+            if (initWallet?.nfts && initWallet.nfts.length > 0) {
+                sortedNfts = [...initWallet.nfts].sort((a, b) => {
+                    // console.log(a);
+                    return a.open_sea_stats.floor_price < b.open_sea_stats.floor_price ? 1 : -1;
+                });
+            } else {
+                sortedNfts = [];
+            }
 
             initWallet.nfts = sortedNfts;
             console.log(initWallet);
@@ -121,10 +106,8 @@ const Website = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('acc');
-        localStorage.removeItem('wat');
         setAccount(null);
-        // setWatchlist(null);
-        window.location.reload();
+        router.push(`/`);
     };
 
     const formatNumber = (number) => {

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useUserContext } from '../context/user';
 import { useRouter } from 'next/router';
 import { Logo } from '../svgs';
 import layout from '../styles/layout.module.scss';
@@ -7,7 +8,15 @@ import styles from '../styles/landing.module.scss';
 
 const Home = () => {
     const router = useRouter();
-    const [ethAddress, setEthAddress] = useState('0xCbF6879A36C677603CdF18dB895CAc33D93fEa3A');
+    const { metamaskLogin, account, walletAddress } = useUserContext();
+    // const [ethAddress, setEthAddress] = useState('0xCbF6879A36C677603CdF18dB895CAc33D93fEa3A');
+
+    useEffect(() => {
+        if (account) {
+            console.log(account);
+            router.push(`/wallet/${walletAddress}`);
+        }
+    }, [account]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,16 +37,16 @@ const Home = () => {
                         <Logo height='60' width='60' style={{ margin: 'auto' }}></Logo>
 
                         {/* <h1>Track the value of any NFT wallet</h1> */}
-                        <h1>Sell NFT's in a Click, for Max Value</h1>
+                        <h1>Analyze and Sell Your NFT's, Fast</h1>
 
                         <div className={styles.grid}>
-                            <span>✅ Instant Gas Fee Calculation</span>
-                            <span>✅ Calculate Sell Price Based on Rarity (Max Value)</span>
-                            <span>✅ Calculate Sell Price By Floor (Quickest)</span>
-                            <span>✅ Instant Receive Sales</span>
+                            <span>✅ Instant gas fee calculation</span>
+                            <span>✅ Calculate price based on Rarity (Max Value)</span>
+                            <span>✅ Calculate price based on Floor (Fastest)</span>
+                            <span>✅ The easiest way to list and sell your nft's</span>
                         </div>
 
-                        <form action='#' method='get' onSubmit={handleSubmit}>
+                        {/* <form action='#' method='get' onSubmit={handleSubmit}>
                             <input
                                 type='text'
                                 placeholder='Enter an ETH address'
@@ -45,7 +54,8 @@ const Home = () => {
                                 onChange={handleChange}
                             />
                             <input type='submit' value='➞' />
-                        </form>
+                        </form> */}
+                        <button onClick={metamaskLogin}>connect your wallet</button>
                         <span className={styles.link}>
                             Powered by{' '}
                             <a
