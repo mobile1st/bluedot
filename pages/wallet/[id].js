@@ -4,14 +4,22 @@ import { useUserContext } from '../../context/user';
 import { useRouter } from 'next/router';
 import { Card, Modal } from '../../components';
 import { Logo } from '../../svgs';
-import { getWallet, getWalletOpenSea } from '../../apis/wallet';
+import { getWallet, getWalletOpenSea } from '../../services/wallet';
+import { connectMetaMask } from '../../services/web3';
 
 import layout from '../../styles/layout.module.scss';
 import styles from '../../styles/wallet.module.scss';
 
 const Website = () => {
-    const { showModal, setShowModal, activeCollection, activeCollectionNfts, setActiveCollectionNfts } =
-        useUserContext();
+    const {
+        showModal,
+        setShowModal,
+        activeCollection,
+        activeCollectionNfts,
+        setActiveCollectionNfts,
+        account,
+        setAccount,
+    } = useUserContext();
     const router = useRouter();
     const { id } = router.query;
 
@@ -21,6 +29,29 @@ const Website = () => {
     const [usdValuation, setUsdValuation] = useState(null);
     const [nftData, setNftData] = useState(null);
 
+    useEffect(() => {
+        console.log('account', account);
+    }, [account]);
+
+    const metamaskLogin = async () => {
+        console.log('clicked metamask button');
+
+        if (window.ethereum) {
+            let walletId = await connectMetaMask();
+            console.log(walletId);
+
+            let walletDetails = await getWallet(walletId);
+            console.log(walletDetails);
+            setAccount(walletDetails);
+
+            localStorage.setItem('acc', JSON.stringify(walletDetails));
+            // localStorage.setItem('wat', JSON.stringify(watchlist));
+        } else if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            window.open('https://metamask.app.link/dapp/www.sudocoins.com', '_blank');
+        } else {
+            console.log('show modal saying to use chrome');
+        }
+    };
     // useEffect(() => {
     //     console.log('wallet id', id);
     // }, [id]);
@@ -88,6 +119,14 @@ const Website = () => {
         }
     }, [wallet, id]);
 
+    const handleLogout = () => {
+        localStorage.removeItem('acc');
+        localStorage.removeItem('wat');
+        setAccount(null);
+        // setWatchlist(null);
+        window.location.reload();
+    };
+
     const formatNumber = (number) => {
         return parseFloat(number).toFixed(2).toLocaleString('en-US');
     };
@@ -138,7 +177,9 @@ const Website = () => {
                             </a> */}
                         </div>
                         {/* <h4>good good</h4> */}
-                        {/* <Logo></Logo> */}
+                        {account && <Logo></Logo>}
+                        <button onClick={metamaskLogin}>connect your wallet</button>
+                        <button onClick={handleLogout}>logout</button>
                     </header>
                     <main className={`${layout.page} ${styles.wallet} ${showModal ? layout['no-scroll'] : ''}`}>
                         <div className={layout.content}>

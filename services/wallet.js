@@ -10,6 +10,11 @@ const getWalletOpenSea = async (ethAddress) => {
     return response.json();
 };
 
-export { getWallet, getWalletOpenSea };
+const getEthRate = async () => {
+    let response = await fetch('https://app.sudocoins.com/art/get-eth-rate');
+    return response.json();
+};
+
+export { getWallet, getWalletOpenSea, getEthRate };
 
 // https://app.sudocoins.com/art/get-eth-rate
