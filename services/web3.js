@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import detectEthereumProvider from '@metamask/detect-provider';
+// import detectEthereumProvider from '@metamask/detect-provider';
 
 const connectMetaMask = async () => {
     const provider = await detectEthereumProvider();

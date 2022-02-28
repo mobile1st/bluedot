@@ -8,7 +8,7 @@ import styles from '../styles/landing.module.scss';
 
 const Home = () => {
     const router = useRouter();
-    const { metamaskLogin, loadWeb3Modal, account, walletAddress } = useUserContext();
+    const { metamaskLogin, connectWeb3, account, walletAddress } = useUserContext();
     // const [ethAddress, setEthAddress] = useState('0xCbF6879A36C677603CdF18dB895CAc33D93fEa3A');
 
     useEffect(() => {
@@ -59,7 +59,7 @@ const Home = () => {
                             <input type='submit' value='➞' />
                         </form> */}
                         {/* <button onClick={metamaskLogin}>Click to Connect</button> */}
-                        <button onClick={loadWeb3Modal}>Click to Connect</button>
+                        <button onClick={connectWeb3}>Click to Connect</button>
                         {/* <span className={styles.link}>Or enter an ETH address</span> */}
 
                         {/* <h2>How It Works</h2> */}
