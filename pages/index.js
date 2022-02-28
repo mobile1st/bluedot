@@ -8,7 +8,7 @@ import styles from '../styles/landing.module.scss';
 
 const Home = () => {
     const router = useRouter();
-    const { metamaskLogin, account, walletAddress } = useUserContext();
+    const { metamaskLogin, loadWeb3Modal, account, walletAddress } = useUserContext();
     // const [ethAddress, setEthAddress] = useState('0xCbF6879A36C677603CdF18dB895CAc33D93fEa3A');
 
     useEffect(() => {
@@ -37,14 +37,17 @@ const Home = () => {
                         <Logo height='60' width='60' style={{ margin: 'auto' }}></Logo>
 
                         {/* <h1>Track the value of any NFT wallet</h1> */}
-                        <h1>Analyze and Sell Your NFT's, Fast</h1>
+                        <div>
+                            {/* <h1>Analyze Your NFT Portfolio</h1> */}
+                            <h1>Sell Your NFT's with One-Click</h1>
+                        </div>
 
-                        <div className={styles.grid}>
+                        {/* <div className={styles.grid}>
                             <span>✅ Instant gas fee calculation</span>
                             <span>✅ Calculate price based on Rarity (Max Value)</span>
                             <span>✅ Calculate price based on Floor (Fastest)</span>
                             <span>✅ The easiest way to list and sell your nft's</span>
-                        </div>
+                        </div> */}
 
                         {/* <form action='#' method='get' onSubmit={handleSubmit}>
                             <input
@@ -55,20 +58,11 @@ const Home = () => {
                             />
                             <input type='submit' value='➞' />
                         </form> */}
-                        <button onClick={metamaskLogin}>connect your wallet</button>
-                        <span className={styles.link}>
-                            Powered by{' '}
-                            <a
-                                href='https://sudocoins.com'
-                                target='_blank'
-                                className={styles.link}
-                                style={{ fontWeight: '700' }}
-                            >
-                                Sudocoins
-                            </a>
-                        </span>
+                        {/* <button onClick={metamaskLogin}>Click to Connect</button> */}
+                        <button onClick={loadWeb3Modal}>Click to Connect</button>
+                        {/* <span className={styles.link}>Or enter an ETH address</span> */}
 
-                        <h2>How It Works</h2>
+                        {/* <h2>How It Works</h2> */}
 
                         <div className={styles.preview}>
                             <img
@@ -76,18 +70,6 @@ const Home = () => {
                                 alt=''
                             />
                         </div>
-
-                        {/* <div className={styles.content}>
-                            <h2>Steps</h2>
-
-                            <div className={styles.grid}>
-                                <span>1. Connect your wallet</span>
-                                <span>2. We calculate your NFT's current value</span>
-                                <span>3. Click sell</span>
-                                <span>4. We list and sell your nft for you</span>
-                                <span>5. You receive your money</span>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
             </main>

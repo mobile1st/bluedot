@@ -1,6 +1,9 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { connectMetaMask } from '../services/web3';
 import { getWallet, getWalletOpenSea } from '../services/wallet';
+import Web3 from 'web3';
+import Web3Modal from 'web3modal';
+import WalletConnectProvider from '@walletconnect/web3-provider';
 
 const UserContext = createContext();
 
@@ -10,12 +13,36 @@ export const UserProvider = ({ children }) => {
     const [activeCollectionNfts, setActiveCollectionNfts] = useState(false);
     const [account, setAccount] = useState(null);
     const [walletAddress, setWalletAddress] = useState(null);
+    const [provider, setProvider] = useState();
 
     useEffect(() => {
         if (localStorage.getItem('acc')) {
             setAccount(localStorage.getItem('acc'));
         }
     }, []);
+
+    // Open wallet selection modal.
+    const loadWeb3Modal = async () => {
+        const providerOptions = {
+            walletconnect: {
+                package: WalletConnectProvider, // required
+                options: {
+                    infuraId: 'INFURA_ID', // required
+                },
+            },
+        };
+
+        const web3Modal = new Web3Modal({
+            network: 'mainnet', // optional
+            cacheProvider: true, // optional
+            providerOptions, // required
+        });
+
+        const provider = await web3Modal.connect();
+
+        const web3 = new Web3(provider);
+        console.log(web3);
+    };
 
     const metamaskLogin = async () => {
         console.log('clicked metamask button');
@@ -53,9 +80,10 @@ export const UserProvider = ({ children }) => {
                 setActiveCollectionNfts,
                 account,
                 setAccount,
-                metamaskLogin,
                 walletAddress,
                 setWalletAddress,
+                metamaskLogin,
+                loadWeb3Modal,
             }}
         >
             {children}
