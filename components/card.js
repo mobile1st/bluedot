@@ -23,8 +23,6 @@ const Card = (props) => {
     const [isPositive, setIsPositive] = useState(null);
     const [loaded, setLoaded] = useState(false);
 
-    console.log(currentGasEstimate);
-
     const handleClick = () => {
         if (activeCollection === props.nft) {
             setActiveCollection(null);
@@ -124,14 +122,17 @@ const Card = (props) => {
                                         <div className={styles.details}>
                                             <div className={styles.row}>
                                                 <span className={styles.title}>Floor Price</span>
-                                                <span className={styles.value}>
-                                                    Ξ
-                                                    {
-                                                        activeCollection?.more_charts?.floor[
-                                                            activeCollection.more_charts.floor.length - 1
-                                                        ].y
-                                                    }
-                                                </span>
+                                                {activeCollection?.more_charts?.floor &&
+                                                    activeCollection?.more_charts?.floor.length > 0 && (
+                                                        <span className={styles.value}>
+                                                            Ξ
+                                                            {
+                                                                activeCollection?.more_charts?.floor[
+                                                                    activeCollection?.more_charts?.floor?.length - 1
+                                                                ].y
+                                                            }
+                                                        </span>
+                                                    )}
                                             </div>
                                             <div className={styles.row}>
                                                 <span className={styles.title}>Service Fee</span>

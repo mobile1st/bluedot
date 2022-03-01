@@ -67,6 +67,8 @@ const Website = () => {
                 sortedNfts = [];
             }
 
+            console.log(account);
+
             initWallet.nfts = sortedNfts;
             console.log(initWallet);
             console.log(sortedNfts);

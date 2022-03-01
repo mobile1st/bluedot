@@ -84,7 +84,9 @@ export const UserProvider = ({ children }) => {
 
             let walletDetails = await getWallet(accounts[0]);
             console.log(walletDetails);
-            setAccount(walletDetails);
+            if (walletDetails) {
+                setAccount(walletDetails);
+            }
 
             localStorage.setItem('acc', JSON.stringify(walletDetails));
         } else {

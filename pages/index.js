@@ -12,11 +12,11 @@ const Home = () => {
     // const [ethAddress, setEthAddress] = useState('0xCbF6879A36C677603CdF18dB895CAc33D93fEa3A');
 
     useEffect(() => {
-        if (account) {
+        if (account && walletAddress) {
             console.log(account);
             router.push(`/wallet/${walletAddress}`);
         }
-    }, [account]);
+    }, [account, walletAddress]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
