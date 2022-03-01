@@ -18,7 +18,10 @@ const Website = () => {
         setActiveCollectionNfts,
         account,
         setAccount,
-        metamaskLogin,
+        connectWeb3,
+        connectOpenSea,
+        openSeaConnection,
+        setOpenSeaConnection,
     } = useUserContext();
     const router = useRouter();
     const { id } = router.query;
@@ -42,13 +45,13 @@ const Website = () => {
     // }, [wallet]);
 
     useEffect(() => {
-        if (activeCollection) {
+        if (activeCollection && nftData && nftData.length > 0) {
             let nfts = nftData.filter((c) => c.collection_name === activeCollection.collection_name);
             setActiveCollectionNfts(nfts);
         } else {
             setActiveCollectionNfts(null);
         }
-    }, [activeCollection]);
+    }, [activeCollection, nftData]);
 
     useEffect(() => {
         const fetchData = async (id) => {
@@ -91,6 +94,9 @@ const Website = () => {
                     collection_name: element.collection.name,
                     image_url: element.image_url,
                     traits: element.traits,
+                    token_id: element.token_id,
+                    token_address: element?.asset_contract?.address,
+                    schema_name: element?.asset_contract?.schema_name,
                 };
                 sortedOpenSeaData.push(data);
             }
@@ -161,7 +167,7 @@ const Website = () => {
                         </div>
                         {/* <h4>good good</h4> */}
                         {account && <Logo></Logo>}
-                        <button onClick={metamaskLogin}>connect your wallet</button>
+                        {/* <button onClick={connectOpenSea}>link opensea</button> */}
                         <button onClick={handleLogout}>logout</button>
                     </header>
                     <main className={`${layout.page} ${styles.wallet} ${showModal ? layout['no-scroll'] : ''}`}>

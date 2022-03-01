@@ -5,12 +5,25 @@ import { ArrowUp } from '../svgs';
 import styles from '../styles/card.module.scss';
 import chartStyles from '../styles/chart.module.scss';
 import layout from '../styles/layout.module.scss';
+import { OpenSeaPort, Network } from 'opensea-js';
 
 const Card = (props) => {
-    const { showModal, setShowModal, activeCollection, setActiveCollection, activeCollectionNfts, chartData } =
-        useUserContext();
+    const {
+        showModal,
+        setShowModal,
+        activeCollection,
+        setActiveCollection,
+        activeCollectionNfts,
+        chartData,
+        walletAddress,
+        provider,
+        currentGasEstimate,
+        setCurrentGasEstimate,
+    } = useUserContext();
     const [isPositive, setIsPositive] = useState(null);
     const [loaded, setLoaded] = useState(false);
+
+    console.log(currentGasEstimate);
 
     const handleClick = () => {
         if (activeCollection === props.nft) {
@@ -27,7 +40,38 @@ const Card = (props) => {
         return ['NaN', '-', 'None'].includes(props.floorChange) ? '--' : `${props.floorChange}%`;
     };
 
-    // console.log(props.nft);
+    const createSellOrder = async (token) => {
+        console.log('provider', provider);
+        console.log('token', token);
+        // Expire this auction one day from now.
+        // Note that we convert from the JavaScript timestamp (milliseconds):
+        const seaport = new OpenSeaPort(provider, {
+            networkName: Network.Main,
+            // apiKey: YOUR_API_KEY,
+        });
+
+        console.log('seaport', seaport);
+
+        let tokenId = token.token_id;
+        let tokenAddress = token.token_address;
+        let accountAddress = walletAddress;
+
+        const expirationTime = Math.round(Date.now() / 1000 + 60 * 60 * 24);
+
+        const listing = await seaport.createSellOrder({
+            asset: {
+                tokenId,
+                tokenAddress,
+            },
+            accountAddress,
+            startAmount: 3,
+            // If `endAmount` is specified, the order will decline in value to that amount until `expirationTime`. Otherwise, it's a fixed-price order:
+            // endAmount: 0.1,
+            expirationTime,
+        });
+
+        console.log(listing);
+    };
 
     return (
         <>
@@ -95,7 +139,9 @@ const Card = (props) => {
                                             </div>
                                             <div className={styles.row}>
                                                 <span className={styles.title}>Gas Fee (Est)</span>
-                                                <span className={styles.value}>$210.45</span>
+                                                <span className={styles.value}>
+                                                    {parseInt(currentGasEstimate).toFixed(3)}
+                                                </span>
                                             </div>
                                             <div className={styles.row}>
                                                 <span className={styles.title}>You'll Receive</span>
@@ -111,7 +157,9 @@ const Card = (props) => {
                                             </div> */}
                                         </div>
 
-                                        <button className={styles.button}>Sell</button>
+                                        <button className={styles.button} onClick={() => createSellOrder(nft)}>
+                                            Sell
+                                        </button>
                                     </div>
                                 </div>
                             ))}
