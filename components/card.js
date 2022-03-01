@@ -113,58 +113,167 @@ const Card = (props) => {
             <>
                 {activeCollection === props.nft && (
                     <>
-                        {activeCollectionNfts &&
-                            activeCollectionNfts.length > 0 &&
-                            activeCollectionNfts.map((nft) => (
-                                <div className={styles['card-expanded']}>
-                                    <img src={nft?.image_url} alt='' />
-                                    <div className={styles.content}>
-                                        <div className={styles.details}>
-                                            <div className={styles.row}>
-                                                <span className={styles.title}>Floor Price</span>
-                                                {activeCollection?.more_charts?.floor &&
-                                                    activeCollection?.more_charts?.floor.length > 0 && (
-                                                        <span className={styles.value}>
-                                                            Ξ
-                                                            {
-                                                                activeCollection?.more_charts?.floor[
-                                                                    activeCollection?.more_charts?.floor?.length - 1
-                                                                ].y
-                                                            }
-                                                        </span>
-                                                    )}
-                                            </div>
-                                            <div className={styles.row}>
-                                                <span className={styles.title}>Service Fee</span>
-                                                <span className={styles.value}>$5.00</span>
-                                            </div>
-                                            <div className={styles.row}>
-                                                <span className={styles.title}>Gas Fee (Est)</span>
+                        <div className={styles['card-expanded']}>
+                            <div className={styles.content}>
+                                <div className={styles.details}>
+                                    <div className={styles.row}>
+                                        <span className={styles.title}>Floor Price</span>
+                                        {activeCollection?.more_charts?.floor &&
+                                            activeCollection?.more_charts?.floor.length > 0 && (
                                                 <span className={styles.value}>
-                                                    {parseInt(currentGasEstimate).toFixed(3)}
+                                                    Ξ
+                                                    {
+                                                        activeCollection?.more_charts?.floor[
+                                                            activeCollection?.more_charts?.floor?.length - 1
+                                                        ].y
+                                                    }
                                                 </span>
-                                            </div>
-                                            <div className={styles.row}>
-                                                <span className={styles.title}>You'll Receive</span>
-                                                <span className={styles.value}>$189.55</span>
-                                            </div>
-                                            {/* <div className={styles.row}>
-                                                <span className={styles.title}>Traits</span>
-                                                {nft.traits &&
-                                                    nft.traits.length > 0 &&
-                                                    nft.traits.map((trait) => (
-                                                        <span className={styles.value}>{trait.trait_type}</span>
-                                                    ))}
-                                            </div> */}
-                                        </div>
-
-                                        <button className={styles.button} onClick={() => createSellOrder(nft)}>
-                                            Sell
-                                        </button>
+                                            )}
+                                    </div>
+                                    <div className={styles.row}>
+                                        <span className={styles.title}>Sales</span>
+                                        {activeCollection?.more_charts?.sales &&
+                                            activeCollection?.more_charts?.sales.length > 0 && (
+                                                <span className={styles.value}>
+                                                    {
+                                                        activeCollection?.more_charts?.sales[
+                                                            activeCollection?.more_charts?.sales?.length - 1
+                                                        ].y
+                                                    }
+                                                </span>
+                                            )}
+                                    </div>
+                                    <div className={styles.row}>
+                                        <span className={styles.title}>Volume</span>
+                                        {activeCollection?.more_charts?.volume &&
+                                            activeCollection?.more_charts?.volume.length > 0 && (
+                                                <span className={styles.value}>
+                                                    Ξ
+                                                    {
+                                                        activeCollection?.more_charts?.volume[
+                                                            activeCollection?.more_charts?.volume?.length - 1
+                                                        ].y
+                                                    }
+                                                </span>
+                                            )}
                                     </div>
                                 </div>
-                            ))}
+                            </div>
+                            <div className={styles.content}>
+                                <div className={styles.details}>
+                                    <div className={styles.row}>
+                                        <span className={styles.title}>Floor Price (1d ago)</span>
+                                        {activeCollection?.more_charts?.floor &&
+                                            activeCollection?.more_charts?.floor.length > 1 && (
+                                                <span className={styles.value}>
+                                                    Ξ
+                                                    {
+                                                        activeCollection?.more_charts?.floor[
+                                                            activeCollection?.more_charts?.floor?.length - 2
+                                                        ].y
+                                                    }
+                                                </span>
+                                            )}
+                                    </div>
+                                    <div className={styles.row}>
+                                        <span className={styles.title}>Sales (1d ago)</span>
+                                        {activeCollection?.more_charts?.sales &&
+                                            activeCollection?.more_charts?.sales.length > 1 && (
+                                                <span className={styles.value}>
+                                                    {
+                                                        activeCollection?.more_charts?.sales[
+                                                            activeCollection?.more_charts?.sales?.length - 2
+                                                        ].y
+                                                    }
+                                                </span>
+                                            )}
+                                    </div>
+                                    <div className={styles.row}>
+                                        <span className={styles.title}>Volume (1d ago)</span>
+                                        {activeCollection?.more_charts?.volume &&
+                                            activeCollection?.more_charts?.volume.length > 1 && (
+                                                <span className={styles.value}>
+                                                    Ξ
+                                                    {
+                                                        activeCollection?.more_charts?.volume[
+                                                            activeCollection?.more_charts?.volume?.length - 2
+                                                        ].y
+                                                    }
+                                                </span>
+                                            )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <>
+                            {activeCollectionNfts && activeCollectionNfts.length > 0 && (
+                                <div className={styles['card-expanded']}>
+                                    <>
+                                        {activeCollectionNfts.map((nft) => (
+                                            <img src={nft?.image_url} alt='' />
+                                        ))}
+                                    </>
+
+                                    {/* <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                            <button className={styles.button} onClick={() => createSellOrder(nft)}>
+                                                Sell
+                                            </button>
+                                        </div>
+                                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                            <img src={nft?.image_url} alt='' />
+                                            <button className={styles.button} onClick={() => createSellOrder(nft)}>
+                                                Sell
+                                            </button>
+                                        </div> */}
+                                </div>
+                            )}
+                        </>
                     </>
+                    // <>
+                    //     {activeCollectionNfts &&
+                    //         activeCollectionNfts.length > 0 &&
+                    //         activeCollectionNfts.map((nft) => (
+                    //             <div className={styles['card-expanded']}>
+                    //                 <img src={nft?.image_url} alt='' />
+                    //                 <div className={styles.content}>
+                    //                     <div className={styles.details}>
+                    //                         <div className={styles.row}>
+                    //                             <span className={styles.title}>Floor Price</span>
+                    //                             {activeCollection?.more_charts?.floor &&
+                    //                                 activeCollection?.more_charts?.floor.length > 0 && (
+                    //                                     <span className={styles.value}>
+                    //                                         Ξ
+                    //                                         {
+                    //                                             activeCollection?.more_charts?.floor[
+                    //                                                 activeCollection?.more_charts?.floor?.length - 1
+                    //                                             ].y
+                    //                                         }
+                    //                                     </span>
+                    //                                 )}
+                    //                         </div>
+                    //                         <div className={styles.row}>
+                    //                             <span className={styles.title}>Service Fee</span>
+                    //                             <span className={styles.value}>$5.00</span>
+                    //                         </div>
+                    //                         <div className={styles.row}>
+                    //                             <span className={styles.title}>Gas Fee (Est)</span>
+                    //                             <span className={styles.value}>
+                    //                                 {parseInt(currentGasEstimate).toFixed(3)}
+                    //                             </span>
+                    //                         </div>
+                    //                         <div className={styles.row}>
+                    //                             <span className={styles.title}>You'll Receive</span>
+                    //                             <span className={styles.value}>$189.55</span>
+                    //                         </div>
+                    //                     </div>
+
+                    //                     <button className={styles.button} onClick={() => createSellOrder(nft)}>
+                    //                         Sell
+                    //                     </button>
+                    //                 </div>
+                    //             </div>
+                    //         ))}
+                    // </>
                 )}
             </>
 

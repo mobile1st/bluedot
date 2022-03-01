@@ -156,22 +156,6 @@ const Website = () => {
 
             {loaded && wallet && wallet.length > 0 && (
                 <>
-                    <header>
-                        <div>
-                            {/* <Link href='/'>home</Link> */}
-                            {/* <a
-                                href='https://airtable.com/shrGT8FfJrFZWS3BC'
-                                target='_blank'
-                                className={layout['header-link']}
-                            >
-                                Request a Feature
-                            </a> */}
-                        </div>
-                        {/* <h4>good good</h4> */}
-                        {account && <Logo></Logo>}
-                        {/* <button onClick={connectOpenSea}>link opensea</button> */}
-                        <button onClick={handleLogout}>logout</button>
-                    </header>
                     <main className={`${layout.page} ${styles.wallet} ${showModal ? layout['no-scroll'] : ''}`}>
                         <div className={layout.content}>
                             <div className={styles.overview}>
