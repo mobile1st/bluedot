@@ -36,8 +36,8 @@ const Home = () => {
                     <div className={styles.landing}>
                         <Logo height='60' width='60' style={{ margin: 'auto' }}></Logo>
 
-                        <h1>Track the value of your NFT wallet</h1>
                         <div>
+                            <h1>Track the value of your NFT wallet</h1>
                             {/* <h1>Analyze Your NFT Portfolio</h1> */}
                             {/* <h1>Sell Your NFT's with One-Click</h1> */}
                         </div>
