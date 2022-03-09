@@ -91,11 +91,11 @@ const Card = (props) => {
                     </div>
                     <div className={styles.right}>
                         {/* <span className={styles.percent}>{props.floorChange}</span> */}
-                        <span className={styles.value}>
+                        {/* <span className={styles.value}>
                             {!props.nft?.more_charts?.floor
                                 ? '--'
                                 : `Ξ${props.nft?.more_charts.floor[props.nft?.more_charts?.floor.length - 1].y}`}
-                        </span>
+                        </span> */}
 
                         <span
                             className={styles['filled-background']}
@@ -115,6 +115,7 @@ const Card = (props) => {
                     <>
                         <div className={styles['card-expanded']}>
                             <div className={styles.content}>
+                                <h6>Last 24 hours</h6>
                                 <div className={styles.details}>
                                     <div className={styles.row}>
                                         <span className={styles.title}>Floor Price</span>
@@ -152,51 +153,6 @@ const Card = (props) => {
                                                     {
                                                         activeCollection?.more_charts?.volume[
                                                             activeCollection?.more_charts?.volume?.length - 1
-                                                        ].y
-                                                    }
-                                                </span>
-                                            )}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={styles.content}>
-                                <div className={styles.details}>
-                                    <div className={styles.row}>
-                                        <span className={styles.title}>Floor Price (1d ago)</span>
-                                        {activeCollection?.more_charts?.floor &&
-                                            activeCollection?.more_charts?.floor.length > 1 && (
-                                                <span className={styles.value}>
-                                                    Ξ
-                                                    {
-                                                        activeCollection?.more_charts?.floor[
-                                                            activeCollection?.more_charts?.floor?.length - 2
-                                                        ].y
-                                                    }
-                                                </span>
-                                            )}
-                                    </div>
-                                    <div className={styles.row}>
-                                        <span className={styles.title}>Sales (1d ago)</span>
-                                        {activeCollection?.more_charts?.sales &&
-                                            activeCollection?.more_charts?.sales.length > 1 && (
-                                                <span className={styles.value}>
-                                                    {
-                                                        activeCollection?.more_charts?.sales[
-                                                            activeCollection?.more_charts?.sales?.length - 2
-                                                        ].y
-                                                    }
-                                                </span>
-                                            )}
-                                    </div>
-                                    <div className={styles.row}>
-                                        <span className={styles.title}>Volume (1d ago)</span>
-                                        {activeCollection?.more_charts?.volume &&
-                                            activeCollection?.more_charts?.volume.length > 1 && (
-                                                <span className={styles.value}>
-                                                    Ξ
-                                                    {
-                                                        activeCollection?.more_charts?.volume[
-                                                            activeCollection?.more_charts?.volume?.length - 2
                                                         ].y
                                                     }
                                                 </span>
